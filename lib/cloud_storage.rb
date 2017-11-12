@@ -27,7 +27,7 @@ module CloudStorage
       case engine_type
       when :yandex
         Engine::Yandex.new(*args)
-      when :square
+      when :dropbox
         Engine::Dropbox.new(*args)
       end
     end
