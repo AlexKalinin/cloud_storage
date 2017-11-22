@@ -77,8 +77,6 @@ module CloudStorage
                    when :put, :post then connection(URL_API).send(method.to_sym, path, nil, headers)
                    when :delete, :get then connection(URL_API).send(method.to_sym, path, headers)
                    end
-        puts response.class
-        puts response.body
         if [Net::HTTPOK, Net::HTTPCreated, Net::HTTPNotFound].include?(response.class)
           JSON.parse(response.body)
         else
@@ -106,8 +104,6 @@ module CloudStorage
         request.body = body.join("\r\n")
         request.content_type = "multipart/form-data; boundary=----#{boundary}"
         response = connection.request(request)
-        puts response.class
-        puts response.body
         unless response.kind_of? Net::HTTPCreated
           raise RuntimeError.new "#{response.body}"
         end
